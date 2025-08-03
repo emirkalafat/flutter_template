@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:flutter_template/src/localization/app_localizations.dart';
 import 'theme.dart';
 
 /// Displays the various settings that can be customized by the user.
