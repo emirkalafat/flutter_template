@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:flutter_template/src/localization/app_localizations.dart';
+import 'package:flutter_template/l10n/app_localizations.dart';
+
 
 class HomeTab extends ConsumerStatefulWidget {
   const HomeTab({super.key, required this.t});

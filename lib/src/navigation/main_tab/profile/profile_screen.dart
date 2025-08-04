@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:flutter_template/src/localization/app_localizations.dart';
+import 'package:flutter_template/l10n/app_localizations.dart';
+import 'package:flutter_template/src/navigation/main_tab/settings/settings_view.dart';
 import 'package:go_router/go_router.dart';
 
-import '../settings/settings_screen.dart';
 
 class ProfileTab extends ConsumerStatefulWidget {
   const ProfileTab({super.key, required this.t});

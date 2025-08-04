@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:flutter_template/src/localization/app_localizations.dart';
-import 'theme.dart';
+import 'package:flutter_template/l10n/app_localizations.dart';
+
+import 'package:flutter_template/src/navigation/main_tab/settings/theme.dart';
+import 'package:flutter_template/src/navigation/main_tab/settings/settings_controller.dart';
 
 /// Displays the various settings that can be customized by the user.
 ///
@@ -19,36 +21,27 @@ class SettingsScreen extends ConsumerStatefulWidget {
   ConsumerState<SettingsScreen> createState() => _SettingsScreenState();
 }
 
+
 class _SettingsScreenState extends ConsumerState<SettingsScreen> {
-  ThemeMode? get theme => ref.watch(themeNotifierProvider);
   AppLocalizations get t => widget.t;
 
   @override
   Widget build(BuildContext context) {
-    // Read the SettingsController from the provider
-
+    final themeMode = ref.watch(themeNotifierProvider);
+    final settingsController = ref.watch(settingsControllerProvider);
+    final locale = settingsController.locale;
     return Scaffold(
-      appBar: AppBar(
-        title: Text(t.settingsTitle),
-      ),
+      appBar: AppBar(title: const Text('Settings')),
       body: Padding(
         padding: const EdgeInsets.all(16),
-        // Glue the SettingsController to the theme selection DropdownButton.
-        //
-        // When a user selects a theme from the dropdown list, the
-        // SettingsController is updated, which rebuilds the MaterialApp.
-        child: Row(
-          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            Text(t.settings_theme_title,style: Theme.of(context).textTheme.titleLarge,),
+            Text(t.settings_theme_title),
             DropdownButton<ThemeMode>(
-              // Read the selected themeMode from the controller
-              value: theme,
-              // Call the updateThemeMode method any time the user selects a theme.
-              onChanged: (mode) => {
-                setState(() {
-                  ref.read(themeNotifierProvider.notifier).setTheme(mode);
-                })
+              value: themeMode,
+              onChanged: (ThemeMode? newTheme) {
+                ref.read(themeNotifierProvider.notifier).setTheme(newTheme);
               },
               items: [
                 DropdownMenuItem(
@@ -62,7 +55,25 @@ class _SettingsScreenState extends ConsumerState<SettingsScreen> {
                 DropdownMenuItem(
                   value: ThemeMode.dark,
                   child: Text(t.settings_theme_dark),
-                )
+                ),
+              ],
+            ),
+            const SizedBox(height: 24),
+            Text('Language'),
+            DropdownButton<Locale>(
+              value: locale ?? const Locale('en'),
+              onChanged: (Locale? newLocale) {
+                ref.read(settingsControllerProvider).updateLocale(newLocale);
+              },
+              items: const [
+                DropdownMenuItem(
+                  value: Locale('en'),
+                  child: Text('English'),
+                ),
+                DropdownMenuItem(
+                  value: Locale('tr'),
+                  child: Text('Türkçe'),
+                ),
               ],
             ),
           ],

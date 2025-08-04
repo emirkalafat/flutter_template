@@ -1,0 +1,28 @@
+{
+  "@@locale": "en",
+  "appTitle": "Template APP",
+  "@appTitle": {
+    "description": "Application title"
+  },
+  "navigationHome": "Home",
+  "navigationProfile": "Profile",
+  "homeTitle": "Home",
+  "@homeTitle": {
+    "description": "Home page title"
+  },
+  "homeWelcome": "Welcome to the Template APP!",
+  "profileTitle": "Profile",
+  "@profileTitle": {
+    "description": "Profile page title"
+  },
+  "profileWelcome": "Welcome to the profile page!",
+  "settingsTitle": "Settings",
+  "@settingsTitle": {
+    "description": "Settings page title"
+  },
+  "settingsWelcome": "Welcome to the settings page!",
+  "settings_theme_title": "Theme",
+  "settings_theme_dark": "Dark",
+  "settings_theme_light": "Light",
+  "settings_theme_system": "System"
+}

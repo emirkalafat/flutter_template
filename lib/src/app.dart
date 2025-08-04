@@ -1,9 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'localization/app_localizations.dart';
-import 'localization/language.dart';
+import 'package:flutter_template/l10n/app_localizations.dart';
 import 'navigation/main_tab/settings/theme.dart';
+import 'navigation/main_tab/settings/settings_controller.dart';
 import 'router/router_repository.dart';
 
 /// The Widget that configures your application.
@@ -16,20 +15,12 @@ class MyApp extends ConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     final router = ref.watch(routerProvider);
 
+    final settingsController = ref.watch(settingsControllerProvider);
     return MaterialApp.router(
       restorationScopeId: 'app',
-      localizationsDelegates: const [
-        AppLocalizations.delegate,
-        //FirebaseUILocalizations.delegate,
-        GlobalMaterialLocalizations.delegate,
-        GlobalWidgetsLocalizations.delegate,
-        GlobalCupertinoLocalizations.delegate,
-      ],
-      supportedLocales: const [
-        Locale('tr', 'TR'), // Türkçe, Türkiye country code
-        Locale('en', 'US'), // English, United States country code
-      ],
-      locale: ref.watch(localeNotifierProvider),
+      localizationsDelegates: AppLocalizations.localizationsDelegates,
+      supportedLocales: AppLocalizations.supportedLocales,
+      locale: settingsController.locale,
       onGenerateTitle: (BuildContext context) =>
           AppLocalizations.of(context)!.appTitle,
 

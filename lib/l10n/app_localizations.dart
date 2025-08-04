@@ -10,38 +10,6 @@ import 'app_localizations_tr.dart';
 
 // ignore_for_file: type=lint
 
-/// Callers can lookup localized strings with an instance of AppLocalizations
-/// returned by `AppLocalizations.of(context)`.
-///
-/// Applications need to include `AppLocalizations.delegate()` in their app's
-/// `localizationDelegates` list, and the locales they support in the app's
-/// `supportedLocales` list. For example:
-///
-/// ```dart
-/// import 'localization/app_localizations.dart';
-///
-/// return MaterialApp(
-///   localizationsDelegates: AppLocalizations.localizationsDelegates,
-///   supportedLocales: AppLocalizations.supportedLocales,
-///   home: MyApplicationHome(),
-/// );
-/// ```
-///
-/// ## Update pubspec.yaml
-///
-/// Please make sure to update your pubspec.yaml to include the following
-/// packages:
-///
-/// ```yaml
-/// dependencies:
-///   # Internationalization support.
-///   flutter_localizations:
-///     sdk: flutter
-///   intl: any # Use the pinned version from flutter_localizations
-///
-///   # Rest of dependencies
-/// ```
-///
 /// ## iOS Applications
 ///
 /// iOS applications define key application metadata, including supported
@@ -62,8 +30,7 @@ import 'app_localizations_tr.dart';
 /// be consistent with the languages listed in the AppLocalizations.supportedLocales
 /// property.
 abstract class AppLocalizations {
-  AppLocalizations(String locale)
-      : localeName = intl.Intl.canonicalizedLocale(locale.toString());
+  AppLocalizations(String locale) : localeName = intl.Intl.canonicalizedLocale(locale.toString());
 
   final String localeName;
 
@@ -71,21 +38,9 @@ abstract class AppLocalizations {
     return Localizations.of<AppLocalizations>(context, AppLocalizations);
   }
 
-  static const LocalizationsDelegate<AppLocalizations> delegate =
-      _AppLocalizationsDelegate();
+  static const LocalizationsDelegate<AppLocalizations> delegate = _AppLocalizationsDelegate();
 
-  /// A list of this localizations delegate along with the default localizations
-  /// delegates.
-  ///
-  /// Returns a list of localizations delegates containing this delegate along with
-  /// GlobalMaterialLocalizations.delegate, GlobalCupertinoLocalizations.delegate,
-  /// and GlobalWidgetsLocalizations.delegate.
-  ///
-  /// Additional delegates can be added by appending to this list in
-  /// MaterialApp. This list does not have to be used at all if a custom list
-  /// of delegates is preferred or required.
-  static const List<LocalizationsDelegate<dynamic>> localizationsDelegates =
-      <LocalizationsDelegate<dynamic>>[
+  static const List<LocalizationsDelegate<dynamic>> localizationsDelegates = <LocalizationsDelegate<dynamic>>[
     delegate,
     GlobalMaterialLocalizations.delegate,
     GlobalCupertinoLocalizations.delegate,
@@ -98,7 +53,7 @@ abstract class AppLocalizations {
     Locale('tr')
   ];
 
-  /// Uygulamanın başlığı
+  /// Application title
   ///
   /// In en, this message translates to:
   /// **'Template APP'**
@@ -107,78 +62,77 @@ abstract class AppLocalizations {
   /// No description provided for @navigationHome.
   ///
   /// In en, this message translates to:
-  /// **'Ana Sayfa'**
+  /// **'Home'**
   String get navigationHome;
 
   /// No description provided for @navigationProfile.
   ///
   /// In en, this message translates to:
-  /// **'Profil'**
+  /// **'Profile'**
   String get navigationProfile;
 
-  /// Ana sayfa başlığı
+  /// Home page title
   ///
   /// In en, this message translates to:
-  /// **'Ana Sayfa'**
+  /// **'Home'**
   String get homeTitle;
 
   /// No description provided for @homeWelcome.
   ///
   /// In en, this message translates to:
-  /// **'Template APP uygulamasına hoş geldiniz!'**
+  /// **'Welcome to the Template APP!'**
   String get homeWelcome;
 
-  /// Profil sayfası başlığı
+  /// Profile page title
   ///
   /// In en, this message translates to:
-  /// **'Profil'**
+  /// **'Profile'**
   String get profileTitle;
 
   /// No description provided for @profileWelcome.
   ///
   /// In en, this message translates to:
-  /// **'Profil sayfasına hoş geldiniz!'**
+  /// **'Welcome to the profile page!'**
   String get profileWelcome;
 
-  /// Ayarlar sayfası başlığı
+  /// Settings page title
   ///
   /// In en, this message translates to:
-  /// **'Ayarlar'**
+  /// **'Settings'**
   String get settingsTitle;
 
   /// No description provided for @settingsWelcome.
   ///
   /// In en, this message translates to:
-  /// **'Ayarlar sayfasına hoş geldiniz!'**
+  /// **'Welcome to the settings page!'**
   String get settingsWelcome;
 
   /// No description provided for @settings_theme_title.
   ///
   /// In en, this message translates to:
-  /// **'Tema'**
+  /// **'Theme'**
   String get settings_theme_title;
 
   /// No description provided for @settings_theme_dark.
   ///
   /// In en, this message translates to:
-  /// **'Karanlık'**
+  /// **'Dark'**
   String get settings_theme_dark;
 
   /// No description provided for @settings_theme_light.
   ///
   /// In en, this message translates to:
-  /// **'Aydınlık'**
+  /// **'Light'**
   String get settings_theme_light;
 
   /// No description provided for @settings_theme_system.
   ///
   /// In en, this message translates to:
-  /// **'Sistem'**
+  /// **'System'**
   String get settings_theme_system;
 }
 
-class _AppLocalizationsDelegate
-    extends LocalizationsDelegate<AppLocalizations> {
+class _AppLocalizationsDelegate extends LocalizationsDelegate<AppLocalizations> {
   const _AppLocalizationsDelegate();
 
   @override
@@ -187,25 +141,25 @@ class _AppLocalizationsDelegate
   }
 
   @override
-  bool isSupported(Locale locale) =>
-      <String>['en', 'tr'].contains(locale.languageCode);
+  bool isSupported(Locale locale) => <String>['en', 'tr'].contains(locale.languageCode);
 
   @override
   bool shouldReload(_AppLocalizationsDelegate old) => false;
 }
 
 AppLocalizations lookupAppLocalizations(Locale locale) {
+
+
   // Lookup logic when only language code is specified.
   switch (locale.languageCode) {
-    case 'en':
-      return AppLocalizationsEn();
-    case 'tr':
-      return AppLocalizationsTr();
+    case 'en': return AppLocalizationsEn();
+    case 'tr': return AppLocalizationsTr();
   }
 
   throw FlutterError(
-      'AppLocalizations.delegate failed to load unsupported locale "$locale". This is likely '
-      'an issue with the localizations generation tool. Please file an issue '
-      'on GitHub with a reproducible sample app and the gen-l10n configuration '
-      'that was used.');
+    'AppLocalizations.delegate failed to load unsupported locale "$locale". This is likely '
+    'an issue with the localizations generation tool. Please file an issue '
+    'on GitHub with a reproducible sample app and the gen-l10n configuration '
+    'that was used.'
+  );
 }
